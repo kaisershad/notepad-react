@@ -7,6 +7,7 @@ module.exports = {
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
+  mode: "production",
 
   resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
@@ -21,6 +22,18 @@ module.exports = {
           // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
           { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
       ]
+  },
+
+  devServer: {
+    // Display only errors to reduce the amount of output.
+    stats: "errors-only",
+    host: process.env.HOST, // Defaults to `localhost`
+    port: process.env.PORT, // Defaults to 8080
+    open: true, // Open the page in browser
+    // Don't refresh if hot loading fails. Good while
+    // implementing the client interface.
+    hotOnly: true,
+    overlay: true
   },
 
   // When importing a module whose path matches one of the following, just
